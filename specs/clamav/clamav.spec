@@ -13,8 +13,8 @@
 
 Summary: Anti-virus software
 Name: clamav
-Version: 0.97.5
-Release: 2%{?dist}
+Version: 0.98.1
+Release: 1%{?dist}
 License: GPL
 Group: Applications/System
 URL: http://www.clamav.net/
@@ -107,6 +107,10 @@ you will need to install %{name}-devel.
 
 %prep
 %setup
+
+%{__cp} etc/clamd.conf.sample etc/clamd.conf
+%{__cp} etc/clamav-milter.conf.sample etc/clamav-milter.conf
+%{__cp} etc/freshclam.conf.sample etc/freshclam.conf
 
 %{__perl} -pi.orig -e 's|/lib\b|/%{_lib}|g;' libtool configure
 
@@ -230,6 +234,10 @@ EOF
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}"
 
+%{__install} -Dp -m0644 etc/clamd.conf %{buildroot}%{_sysconfdir}/clamd.conf
+%{__install} -Dp -m0644 etc/clamav-milter.conf %{buildroot}%{_sysconfdir}/clamav-milter.conf
+%{__install} -Dp -m0644 etc/freshclam.conf %{buildroot}%{_sysconfdir}/freshclam.conf
+
 %{__install} -Dp -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/clamd
 %{__install} -Dp -m0755 freshclam.cron %{buildroot}%{_sysconfdir}/cron.daily/freshclam
 %{__install} -Dp -m0644 freshclam.logrotate %{buildroot}%{_sysconfdir}/logrotate.d/freshclam
@@ -323,6 +331,7 @@ fi
 %doc %{_mandir}/man1/clamscan.1*
 %doc %{_mandir}/man1/freshclam.1*
 %doc %{_mandir}/man5/freshclam.conf.5*
+%doc /etc/freshclam.conf.sample
 %config(noreplace) %{_sysconfdir}/freshclam.conf
 %{_bindir}/clambc
 %{_bindir}/clamscan
@@ -338,7 +347,7 @@ fi
 
 %files -n clamd
 %defattr(-, root, root, 0755)
-%doc etc/clamd.conf
+%doc /etc/clamd.conf.sample
 %doc %{_mandir}/man1/clambc.1*
 %doc %{_mandir}/man1/clamconf.1*
 %doc %{_mandir}/man1/clamdscan.1*
@@ -365,6 +374,7 @@ fi
 %defattr(-, root, root, 0755)
 %doc %{_mandir}/man5/clamav-milter.conf.5*
 %doc %{_mandir}/man8/clamav-milter.8*
+%doc /etc/clamav-milter.conf.sample
 %config(noreplace) %{_sysconfdir}/clamav-milter.conf
 %config(noreplace) %{_sysconfdir}/sysconfig/clamav-milter
 %config %{_initrddir}/clamav-milter
@@ -393,6 +403,21 @@ fi
 %exclude %{_libdir}/libclamunrar_iface.la
 
 %changelog
+* Mon Jan 20 2014 David Hrbáč <david@hrbac.cz> - 0.98.1-1
+- new upstream release
+
+* Thu Sep 19 2013 David Hrbáč <david@hrbac.cz> - 0.98-1
+- new upstream release
+
+* Tue May 07 2013 David Hrbáč <david@hrbac.cz> - 0.97.8-1
+- new upstream release
+
+* Wed Mar 20 2013 Dag Wieers <dag@wieers.com> - 0.97.7-1
+- Updated to release 0.97.7.
+
+* Sun Sep 23 2012 Dag Wieers <dag@wieers.com> - 0.97.6-1
+- Updated to release 0.97.6.
+
 * Mon Jun 25 2012 David Hrbáč <david@hrbac.cz> - 0.97.5-2
 - removed missing *.cld files (#183)
 

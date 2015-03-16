@@ -5,9 +5,12 @@
 %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")
 %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")
 
+%{?el4:%define _without_libpcapdevel 1}
+%{?el3:%define _without_libpcapdevel 1}
+
 Summary: DNS(SEC) library based on Net::DNS
 Name: ldns
-Version: 1.6.13
+Version: 1.6.16
 Release: 1%{?dist}
 License: GPL
 Group: System Environment/Libraries
@@ -19,10 +22,11 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: binutils
 BuildRequires: doxygen
 BuildRequires: gcc-c++
-BuildRequires: libpcap-devel
+BuildRequires: libpcap
+%{!?_without_libpcapdevel:BuildRequires:libpcap-devel}
 BuildRequires: make
 BuildRequires: openssl-devel
-BuildRequires: python-devel
+BuildRequires: python-devel >= 2.4
 BuildRequires: swig
 
 %description
@@ -113,6 +117,9 @@ make %{?_smp_mflags} doc
 %exclude %{python_sitearch}/*.la
 
 %changelog
+* Mon Dec 17 2012 David Hrbáč <david@hrbac.cz> - 1.6.16-1
+- new upstream release
+
 * Tue May 22 2012 David Hrbáč <david@hrbac.cz> - 1.6.13-1
 - new upstream release
 

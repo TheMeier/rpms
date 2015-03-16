@@ -6,8 +6,8 @@
 
 Summary: Process monitor and restart utility
 Name: monit
-Version: 5.4
-Release: 1%{?dist}
+Version: 5.5
+Release: 2%{?dist}
 License: GPLv3
 Group: Applications/Internet
 URL: http://mmonit.com/monit/
@@ -23,6 +23,7 @@ BuildRequires: make
 BuildRequires: openssl-devel
 BuildRequires: perl
 BuildRequires: /usr/bin/logger
+BuildRequires: pam-devel
 
 %description
 Monit is an utility for monitoring daemons or similar programs running on
@@ -102,6 +103,12 @@ fi
 %attr(0600, root, root) %config(noreplace) %{_sysconfdir}/monit.conf
 
 %changelog
+* Thu Sep 19 2013 David Hrbáč <david@hrbac.cz> - 5.5-2
+- pam-devel build requirement
+
+* Mon Dec 17 2012 David Hrbáč <david@hrbac.cz> - 5.5-1
+- new upstream release
+
 * Mon May 28 2012 David Hrbáč <david@hrbac.cz> - 5.4-1
 - new upstream release
 

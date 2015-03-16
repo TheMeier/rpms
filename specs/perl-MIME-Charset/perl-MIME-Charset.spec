@@ -9,7 +9,7 @@
 
 Summary: Charset Informations for MIME
 Name: perl-MIME-Charset
-Version: 1.008
+Version: 1.010
 Release: 1%{?dist}
 License: Artistic/GPL
 Group: Applications/CPAN
@@ -22,8 +22,10 @@ BuildArch: noarch
 BuildRequires: perl(Encode) >= 1.98
 BuildRequires: perl(Test::More)
 BuildRequires: perl >= 5.005
+BuildRequires: perl(ExtUtils::MakeMaker)
 Requires: perl(Encode) >= 1.98
 Requires: perl >= 5.005
+Requires: perl(ExtUtils::MakeMaker)
 
 %filter_from_requires /^perl*/d
 %filter_setup
@@ -58,6 +60,9 @@ find %{buildroot} -name .packlist -exec %{__rm} {} \;
 %{perl_vendorlib}/MIME/Charset.pm
 
 %changelog
+* Mon Jun 24 2013 David Hrbáč <david@hrbac.cz> - 1.010-1
+- new upstream release
+
 * Fri Dec 11 2009 Christoph Maser <cmr@financial.com> - 1.008-1
 - Updated to version 1.008.
 

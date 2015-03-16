@@ -3,8 +3,8 @@
 
 Summary: Powerful and fullfeatured server logfile analyzer
 Name: awstats
-Version: 7.0
-Release: 2%{?dist}
+Version: 7.2
+Release: 1%{?dist}
 License: GPL
 Group: Applications/Internet
 URL: http://awstats.sourceforge.net/
@@ -116,6 +116,15 @@ dos2unix wwwroot/cgi-bin/awredir.pl
 %{_localstatedir}/www/awstats/
 
 %changelog
+* Tue Jul 30 2013 David Hrbáč <david@hrbac.cz> - 7.2-1
+- new upstream release
+
+* Thu Mar 21 2013 David Hrbáč <david@hrbac.cz> - 7.1.1-1
+- new upstream release
+
+* Sat Dec 08 2012 David Hrbáč <david@hrbac.cz> - 7.1-1
+- new upstream release
+
 * Sat Apr 09 2011 Dag Wieers <dag@wieers.com> - 7.0-2
 - Add missing dependency perl(Geo::IP). (Zenon Panoussis)
 
