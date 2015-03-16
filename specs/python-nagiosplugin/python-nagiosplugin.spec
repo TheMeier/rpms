@@ -15,7 +15,7 @@ Release: 1%{?dist}
 Summary: Class library for writing Nagios (Icinga) plugins
 Group: Development/Languages
 License: GPL
-URL: http://pypi.python.org/pypi/NNAAMMEE
+URL: http://pypi.python.org/pypi/%{real_name}
 
 Source: https://pypi.python.org/packages/source/n/%{real_name}/%{name}-%{version}.zip
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
